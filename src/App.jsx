@@ -8,16 +8,21 @@ function App() {
   const [data, setData] = useState([]);
   useEffect(() => {
     setTimeout(() => {
-      fetch("http://www.omdbapi.com/?i=tt3896198&apikey=e8c8176f&s=iron").then(
+      fetch("http://www.omdbapi.com/?i=tt3896198&apikey=e8c8176f&s=panda").then(
         (res) => res.json().then((data) => setData(data.Search))
       );
     }, 2000);
-  });
+  }, []);
 
   const searchData = (arg) => {
     fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e8c8176f&s=${arg}`).then(
       (res) => res.json().then((data) => setData(data.Search))
     );
+    if (arg === "") {
+      fetch("http://www.omdbapi.com/?i=tt3896198&apikey=e8c8176f&s=panda").then(
+        (res) => res.json().then((data) => setData(data.Search))
+      );
+    }
   };
   return (
     <div className="app">
