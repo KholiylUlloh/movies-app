@@ -14,10 +14,12 @@ function App() {
     }, 2000);
   }, []);
 
-  const searchData = (arg) => {
-    fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e8c8176f&s=${arg}`).then(
-      (res) => res.json().then((data) => setData(data.Search))
-    );
+  const searchData = (arg, type = "all") => {
+    fetch(
+      `http://www.omdbapi.com/?i=tt3896198&apikey=e8c8176f&s=${arg}${
+        type !== "all" ? `&type=${type}` : ""
+      }`
+    ).then((res) => res.json().then((data) => setData(data.Search)));
     if (arg === "") {
       fetch("http://www.omdbapi.com/?i=tt3896198&apikey=e8c8176f&s=panda").then(
         (res) => res.json().then((data) => setData(data.Search))
